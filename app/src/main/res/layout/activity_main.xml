@@ -9,33 +9,26 @@
 
     <ProgressBar
         android:id="@+id/simpleProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progress="25"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="43dp"
-        android:layout_weight="0.70"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
         android:indeterminate="false"
-        android:max="200"
-        android:visibility="visible"
+        android:max="100"
+        android:minWidth="300dp"
+        android:minHeight="50dp"
+        android:progress="0"
         app:layout_constraintBottom_toTopOf="@+id/trend"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/trend"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="248dp"
         android:background="#0f0"
         android:padding="10dp"
         android:text="@string/trends"
@@ -43,7 +36,22 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/simpleProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:text=""
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/simpleProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleProgressBar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.915" />
 </androidx.constraintlayout.widget.ConstraintLayout>
