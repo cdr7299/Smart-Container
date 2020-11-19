@@ -96,6 +96,7 @@ public class TrendsActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                dayOfMonth++;
                                 eText2.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
                             }
                         }, year, month, day);
@@ -161,37 +162,35 @@ public class TrendsActivity extends AppCompatActivity {
                 tvw.setText("Status : Data Fetched");
 
                 Log.i("myApp", "Data Refreshed, total size :" + posts.size());
-
-//                ArrayList<String> xaxis=new ArrayList<String>();
-//                ArrayList<Integer> yaxis=new ArrayList<Integer>();
-
                 x = new ArrayList<Entry>();
                 y = new ArrayList<String>();
-
-                for(int i=0;i<posts.size();i++)
-                {
-//                    xaxis.add( );
-//                    yaxis.add();
-                    String heights= String.valueOf(posts.get(i).getHeight());
-                    String date=posts.get(i).getCreation_date();
-                    x.add(new Entry(Integer.parseInt(heights), i));
-                    y.add(date);
+                int count = 0;
+                for (int i = 0; i < posts.size(); i += 100) {
+                    int heights = posts.get(i).getHeight();
+                    int percentage = ((total_height - heights) * 100) / total_height;
+                    String date = posts.get(i).getCreation_date();
+//                    Log.i("myApp","p : " + percentage);
+                    if (percentage > -1) {
+                        x.add(new Entry(percentage, count++));
+                        y.add(date);
+                    }
                 }
 
-                mChart = (LineChart)findViewById(R.id.chart);
+
+                mChart = (LineChart) findViewById(R.id.chart);
                 mChart.setDrawGridBackground(false);
 //                mChart.setDescription("");
                 mChart.setTouchEnabled(true);
                 mChart.setDragEnabled(true);
                 mChart.setScaleEnabled(true);
                 mChart.setPinchZoom(true);
-                mChart.getXAxis().setTextSize(15f);
-                mChart.getAxisLeft().setTextSize(15f);
+                mChart.getXAxis().setTextSize(12f);
+                mChart.getAxisLeft().setTextSize(12f);
 //        mChart.setMarkerView(mv);
                 XAxis xl = mChart.getXAxis();
                 xl.setAvoidFirstLastClipping(true);
                 YAxis leftAxis = mChart.getAxisLeft();
-                leftAxis.setInverted(true);
+                leftAxis.setInverted(false);
                 YAxis rightAxis = mChart.getAxisRight();
                 rightAxis.setEnabled(false);
                 Legend l = mChart.getLegend();
@@ -201,51 +200,9 @@ public class TrendsActivity extends AppCompatActivity {
                 set1.setColors(ColorTemplate.COLORFUL_COLORS);
                 set1.setLineWidth(1.5f);
                 set1.setCircleRadius(4f);
-                LineData data = new LineData((ILineDataSet) y, set1);
+                LineData data = new LineData(y, set1);
                 mChart.setData(data);
                 mChart.invalidate();
-//                mChart = findViewById(R.id.chart);
-//                mChart.setTouchEnabled(true);
-//                mChart.setPinchZoom(true);
-//
-//                ArrayList<Entry> values = new ArrayList<>();
-//                for(int i=0;i<posts.size();i++)
-//                {
-//                    values.add(new Entry(yaxis.get(i));
-//                }
-
-
-
-//                ArrayList<String> xVals = new ArrayList<String>();
-//                ArrayList<Entry> yVals = new ArrayList<>();
-//
-//                for (int i = 0; i <= xaxis.size() - 1; i++) {
-//
-//                        xVals.add(i,"");
-//
-//                    xVals.add(i, xaxis.get(i));
-//                    yVals.add(new Entry(yaxis.get(i), i));
-//                }
-
-//                lineChart = findViewById(R.id.activity_main_linechart);
-//                LineDataSet set1 = new LineDataSet(yVals, "");
-//                set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-//                set1.setColor(ColorTemplate.getHoloBlue());
-//                set1.setValueTextColor(ColorTemplate.getHoloBlue());
-//                set1.setLineWidth(1.5f);
-////                set1.setDrawCircles(false);
-////                set1.setDrawValues(false);
-////                set1.setFillAlpha(65);
-////                set1.setFillColor(ColorTemplate.getHoloBlue());
-////                set1.setHighLightColor(Color.rgb(244, 117, 117));
-////                set1.setDrawCircleHole(false);
-//
-//                LineData data = new LineData((ILineDataSet) xVals, set1);
-//                data.setValueTextColor(Color.WHITE);
-//                data.setValueTextSize(9f);
-//
-//                lineChart.setData(data);
-
             }
 
 

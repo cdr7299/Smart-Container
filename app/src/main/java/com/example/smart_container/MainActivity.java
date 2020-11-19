@@ -92,16 +92,16 @@ public class MainActivity extends AppCompatActivity {
                 int height = posts.get(req_size - 1).getHeight();
                 Log.i("myApp", "Data Refreshed" + Integer.toString(height));
 
-                if (total_height > height) {
-                    int percentage = ((height) * 100) / total_height;
+                if (total_height >= height) {
+                    int percentage = ((total_height - height) * 100) / total_height;
                     pr.setProgress(percentage);
                     textView_result.setTextColor(Color.parseColor("#00F400"));
                     textView_result.setText("Status : " + percentage + "% out of 100 " + "Used!");
 
                 } else {
-                    pr.setProgress(100);
+                    pr.setProgress(0);
                     textView_result.setTextColor(Color.parseColor("#FF0000"));
-                    textView_result.setText("Status : " + 100 + "% Used");
+                    textView_result.setText("Status : " + 0 + "% Used");
 
                 }
             }
